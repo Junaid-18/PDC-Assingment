@@ -15,11 +15,23 @@ void chain_matrix(int p[],int m[N][N]){
                 #pragma omp critical
                 {
                     if(cost<m[i][j]){
-                        m[i][j]=cost;
+                        m[i][j]=cost; //Critical section
                     }
                 }
             }
         }
     }
+
+}
+int main(){
+     int p[N]={20,30,40,50,10};//dimensions
+    int m[N][N]={0};
+    int num_of_threads=8;
+    omp_set_num_threads(num_of_threads);
+    double stime=omp_get_wtime();
+    chain_matrix(p,m);
+    double etime=omp_get_wtime();
+    printf("Parrallel Chain Matrix Multiplication Has Exe_time = %f seconds/n",etime-stime );
+    return 0;
 
 }
