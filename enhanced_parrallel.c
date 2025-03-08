@@ -8,12 +8,12 @@
 void chain_matrix(int p[], int n, int m[N][N]) { 
     int i, j, k, cost;  
 
-    #pragma omp parallel for private(i, j, k, cost) shared(m, p)
+    #pragma omp parallel for private(i, j, k, cost) shared(m, p) schedule(static)
     for (int length = 2; length < n; length++) {  
         for (i = 1; i < n - length + 1; i++) {  
             j = i + length - 1;
             int min_cost = INT_MAX;//Int max will compute that  computed cost is smaller than the initial cost and store it in  min cost variable
-            
+
 
             for (k = i; k < j; k++) {
                 cost = m[i][k] + m[k + 1][j] + p[i - 1] * p[k] * p[j];
