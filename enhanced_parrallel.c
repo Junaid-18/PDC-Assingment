@@ -9,7 +9,7 @@ void chain_matrix(int p[], int n, int m[N][N]) {
     int length, i, j, k, cost;
 
     for (length = 2; length < n; length++) {  
-        #pragma omp parallel for private(i, j, k, cost) schedule(static,100)  
+        #pragma omp parallel for private(i, j, k, cost) schedule(dynamic)  
         for (i = 1; i < (n - length + 1); i++) {  
             j = i + length - 1;
             m[i][j] = INT_MAX;
