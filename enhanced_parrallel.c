@@ -9,7 +9,7 @@ void chain_matrix(int p[], int n, int m[N][N]) {
     int length, i, j, k, cost;
 
     for (length = 2; length < n; length++) {  
-        #pragma omp parallel for private(i, j, k, cost) schedule(dynamic)  
+        #pragma omp parallel for private(i, j, k, cost) schedule(static,100)  
         for (i = 1; i < (n - length + 1); i++) {  
             j = i + length - 1;
             m[i][j] = INT_MAX;
@@ -31,7 +31,7 @@ void print_matrix(int m[N][N], int n) {
     for (int i = 1; i < n; i++) { //this will traverse rows in matrix
         for (int j = 1; j < n; j++) {  // this will traverse column in mmatrix
             if (i > j) {
-                printf(" ---- ");  
+                printf(" ---- ");
             } else {
                 printf("%5d ", m[i][j]); //for actual values displaying 
             }
@@ -57,7 +57,7 @@ int main() {
     
     printf("\nParallel Chain Matrix Multiplication Execution Time: %f seconds\n", etime - stime);
 
-    print_matrix(m, n);  // Print the matrix after execution
+    //print_matrix(m, n);  // Print the matrix after execution
 
     return 0;
 }
